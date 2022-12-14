@@ -1,10 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingJobs.Api", "CodingJobs.Api\CodingJobs.Api.csproj", "{543C43A4-A614-4F72-A735-651D8AA97F17}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingJobs.Api", "src\CodingJobs.Api\CodingJobs.Api.csproj", "{543C43A4-A614-4F72-A735-651D8AA97F17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingJobs.Domain", "CodingJobs.Domain\CodingJobs.Domain.csproj", "{3B1D2ADC-293E-45A6-8832-7A0B9BC2614C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingJobs.Domain", "src\CodingJobs.Domain\CodingJobs.Domain.csproj", "{3B1D2ADC-293E-45A6-8832-7A0B9BC2614C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingJobs.Infrastructure", "CodingJobs.Infrastructure\CodingJobs.Infrastructure.csproj", "{AD501C4B-C010-4459-9170-B7BAB53ECAF2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingJobs.Infrastructure", "src\CodingJobs.Infrastructure\CodingJobs.Infrastructure.csproj", "{AD501C4B-C010-4459-9170-B7BAB53ECAF2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DB012354-5E6F-426F-9C84-7114E395DACB}"
 EndProject
