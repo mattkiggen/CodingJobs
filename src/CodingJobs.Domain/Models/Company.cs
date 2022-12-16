@@ -6,11 +6,17 @@ public class Company
 {
     public int CompanyId { get; set; }
 
-    [Required] public string Name { get; set; } = null!;
+    [Required]
+    public string Name { get; set; } = null!;
 
-    [Required] public string About { get; set; } = null!;
+    [Required]
+    public string About { get; set; } = null!;
 
-    [Required] public string WebsiteUrl { get; set; } = null!;
+    [Required]
+    public string WebsiteUrl { get; set; } = null!;
+
+    public ICollection<Job>? Jobs { get; set; }
     
-    [Required] public int AddressId { get; set; }
+    [Required]
+    public Address Address { get; set; }
 }

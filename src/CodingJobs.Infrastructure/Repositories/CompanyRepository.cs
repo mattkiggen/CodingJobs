@@ -7,16 +7,16 @@ namespace CodingJobs.Infrastructure.Repositories;
 
 public class CompanyRepository : ICompanyRepository
 {
-    private readonly AppDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public CompanyRepository(AppDbContext context)
+    public CompanyRepository(ApplicationDbContext context)
     {
         _context = context;
     }
     
     public async Task<ICollection<Company>> GetAllAsync()
     {
-        return await _context.Companies.ToListAsync();
+        return await _context.Companies.Include(company => company.Address).ToListAsync();
     }
 
     public async Task<Company?> FindAsync(Expression<Func<Company, bool>> predicate)

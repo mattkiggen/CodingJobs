@@ -4,18 +4,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodingJobs.Infrastructure.Database;
 
-public class AppDbContext : DbContext
+public class ApplicationDbContext : DbContext
 {
-    public DbSet<Job> Jobs => Set<Job>();
     public DbSet<Company> Companies => Set<Company>();
-    public DbSet<Address> Addresses => Set<Address>();
+    public DbSet<Job> Jobs => Set<Job>();
+    public DbSet<Address> Addresses { get; set; }
 
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
 }

@@ -4,10 +4,10 @@ namespace CodingJobs.Infrastructure.Database;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly AppDbContext _context;
+    private readonly ApplicationDbContext _context;
     public ICompanyRepository CompanyRepository { get; }
 
-    public UnitOfWork(AppDbContext context)
+    public UnitOfWork(ApplicationDbContext context)
     {
         _context = context;
         CompanyRepository = new CompanyRepository(_context);
