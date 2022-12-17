@@ -26,12 +26,7 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy(
-        "read:companies", 
-        p => p.Requirements.Add(
-            new HasScopeRequirement("read:companies", builder.Configuration["Auth0:Domain"])
-        )
-    );
+    options.AddCustomPolicies(builder.Configuration);
 });
 
 builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();

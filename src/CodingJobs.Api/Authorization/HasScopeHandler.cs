@@ -18,7 +18,7 @@ public class HasScopeHandler : AuthorizationHandler<HasScopeRequirement>
             ?.Value.Split(' ');
 
         // Succeed if the scope array contains the required scope
-        if (scopes.Any(s => s == requirement.Scope))
+        if (scopes != null && scopes.Any(s => s == requirement.Scope))
             context.Succeed(requirement);
 
         return Task.CompletedTask;

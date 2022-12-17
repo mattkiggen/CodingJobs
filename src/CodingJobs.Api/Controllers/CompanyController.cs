@@ -16,10 +16,16 @@ public class CompanyController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize("read:companies")]
     public async Task<IActionResult> GetCompanies()
     {
         var companies = await _unitOfWork.CompanyRepository.GetAllAsync();
         return Ok(companies);
+    }
+
+    [HttpPost]
+    [Authorize("create:companies")]
+    public async Task<IActionResult> AddNewCompany()
+    {
+        return Ok("Company has been created");
     }
 }
