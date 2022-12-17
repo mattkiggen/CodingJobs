@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using CodingJobs.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using SmartEnum.EFCore;
 
 namespace CodingJobs.Infrastructure.Database;
 
@@ -17,5 +18,6 @@ public class ApplicationDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        modelBuilder.ConfigureSmartEnum();
     }
 }

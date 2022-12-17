@@ -2,9 +2,9 @@
 
 namespace CodingJobs.Domain.Models;
 
-public class Tag
+public class Skill
 {
-    public int TagId { get; set; }
+    public int SkillId { get; set; }
     
     [Required] public string Name { get; set; } = null!;
     public string? Description { get; set; }
