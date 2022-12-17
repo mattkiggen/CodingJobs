@@ -2,6 +2,6 @@
 
 public enum EmploymentType
 {
-    FullTime,
-    PartTime
+    Permanent,
+    Contract
 }

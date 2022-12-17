@@ -16,7 +16,7 @@ public class CompanyRepository : ICompanyRepository
     
     public async Task<ICollection<Company>> GetAllAsync()
     {
-        return await _context.Companies.Include(company => company.Address).ToListAsync();
+        return await _context.Companies.ToListAsync();
     }
 
     public async Task<Company?> FindAsync(Expression<Func<Company, bool>> predicate)

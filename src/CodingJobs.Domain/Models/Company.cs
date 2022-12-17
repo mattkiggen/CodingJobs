@@ -6,17 +6,21 @@ public class Company
 {
     public int CompanyId { get; set; }
 
-    [Required]
-    public string Name { get; set; } = null!;
+    // Details
+    [Required] public string Name { get; set; } = null!;
+    [Required] public string About { get; set; } = null!;
+    [Required] public string Location { get; set; } = null!;
+    [Required] public string Slug { get; set; } = null!;
+    public uint? NumberOfEmployees { get; set; }
+    public string? YearFounded { get; set; }
+    public string? CompanyLogoUrl { get; set; }
 
-    [Required]
-    public string About { get; set; } = null!;
+    // Online presence
+    public string? WebsiteUrl { get; set; }
+    public string? FacebookUrl { get; set; }
+    public string? TwitterUrl { get; set; }
+    public string? LinkedinUrl { get; set; }
 
-    [Required]
-    public string WebsiteUrl { get; set; } = null!;
-
+    // Jobs posted
     public ICollection<Job>? Jobs { get; set; }
-    
-    [Required]
-    public Address Address { get; set; }
 }
