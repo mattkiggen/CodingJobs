@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using CodingJobs.Api.Authorization;
+using CodingJobs.Application;
 using CodingJobs.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -7,8 +8,8 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddApplicationServices();
 
 builder.Services.AddAuthentication(options =>
 {
@@ -30,7 +31,6 @@ builder.Services.AddAuthorization(options =>
 });
 
 builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
-
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

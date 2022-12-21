@@ -1,4 +1,4 @@
-﻿using CodingJobs.Infrastructure.Database;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,24 +8,23 @@ namespace CodingJobs.Api.Controllers;
 [Route("api/companies")]
 public class CompanyController : ControllerBase
 {
-    private readonly IUnitOfWork _unitOfWork;
 
-    public CompanyController(IUnitOfWork unitOfWork)
+    public CompanyController()
     {
-        _unitOfWork = unitOfWork;
+        
     }
 
     [HttpGet]
     public async Task<IActionResult> GetCompanies()
     {
-        var companies = await _unitOfWork.CompanyRepository.GetAllAsync();
-        return Ok(companies);
+        return Ok("companies");
     }
 
     [HttpPost]
     [Authorize("create:companies")]
     public async Task<IActionResult> AddNewCompany()
     {
-        return Ok("Company has been created");
+        var id = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+        return Ok(id?.Value);
     }
 }

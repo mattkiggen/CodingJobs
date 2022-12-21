@@ -8,6 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Mediator.Abstractions" Version="2.0.29" />
+        <PackageReference Include="Mediator.SourceGenerator" Version="2.0.29">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.12" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.12">
           <PrivateAssets>all</PrivateAssets>
@@ -17,7 +22,12 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\CodingJobs.Application\CodingJobs.Application.csproj" />
       <ProjectReference Include="..\CodingJobs.Infrastructure\CodingJobs.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Contracts" />
     </ItemGroup>
 
 </Project>
