@@ -8,7 +8,7 @@ public static class ConfigureServices
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
-        services.AddMediator();
+        services.AddMediator(options => { options.ServiceLifetime = ServiceLifetime.Scoped; });
         return services;
     }
 }

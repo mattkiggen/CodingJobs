@@ -24,9 +24,10 @@ public class CompanyRepository : ICompanyRepository
         return await _context.Companies.FirstOrDefaultAsync(predicate);
     }
 
-    public async Task AddAsync(Company newCompany)
+    public async Task<Company> AddAsync(Company newCompany)
     {
-        await _context.Companies.AddAsync(newCompany);
+        var result = await _context.Companies.AddAsync(newCompany);
+        return result.Entity;
     }
 
     public async Task UpdateAsync(Company company)

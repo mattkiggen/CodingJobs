@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4200E638
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingJobs.Application", "src\CodingJobs.Application\CodingJobs.Application.csproj", "{3500EC5B-EBAC-4AB2-BF31-B0FE6702A0A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingJobs.Contracts", "CodingJobs.Contracts\CodingJobs.Contracts.csproj", "{D3DE595D-7934-4C4B-8E31-C9C7822064CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingJobs.Contracts", "src\CodingJobs.Contracts\CodingJobs.Contracts.csproj", "{D3DE595D-7934-4C4B-8E31-C9C7822064CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

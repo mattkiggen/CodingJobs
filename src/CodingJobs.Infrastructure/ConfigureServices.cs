@@ -10,7 +10,7 @@ public static class ConfigureServices
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration config)
     {
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(config["Infrastructure:Db"])
+            options.UseSqlServer(config["Db:ConnectionString"])
         );
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();

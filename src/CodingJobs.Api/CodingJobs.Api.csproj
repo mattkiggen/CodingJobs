@@ -23,11 +23,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\CodingJobs.Application\CodingJobs.Application.csproj" />
+      <ProjectReference Include="..\CodingJobs.Contracts\CodingJobs.Contracts.csproj" />
       <ProjectReference Include="..\CodingJobs.Infrastructure\CodingJobs.Infrastructure.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Contracts" />
     </ItemGroup>
 
 </Project>
