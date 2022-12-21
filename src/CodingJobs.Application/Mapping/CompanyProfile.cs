@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using CodingJobs.Contracts.Company;
+using CodingJobs.Contracts.Company.Requests;
+using CodingJobs.Contracts.Company.Responses;
 
 namespace CodingJobs.Application.Mapping;
 

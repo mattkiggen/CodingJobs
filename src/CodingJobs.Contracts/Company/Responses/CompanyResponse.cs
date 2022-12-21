@@ -1,4 +1,4 @@
-﻿namespace CodingJobs.Contracts.Company;
+﻿namespace CodingJobs.Contracts.Company.Responses;
 
 public class CompanyResponse
 {

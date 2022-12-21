@@ -1,4 +1,5 @@
 ﻿using CodingJobs.Contracts.Company;
+using CodingJobs.Contracts.Company.Requests;
 using Mediator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
