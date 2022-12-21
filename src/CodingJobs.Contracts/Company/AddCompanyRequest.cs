@@ -3,7 +3,7 @@ using Mediator;
 
 namespace CodingJobs.Contracts.Company;
 
-public class AddCompanyRequest : IRequest<AddCompanyResponse>
+public class AddCompanyRequest : IRequest<CompanyResponse>
 {
     [Required] public string Name { get; set; } = null!;
     [Required] public string About { get; set; } = null!;

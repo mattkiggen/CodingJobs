@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using CodingJobs.Contracts.Company;
+﻿using CodingJobs.Contracts.Company;
 using Mediator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +19,16 @@ public class CompanyController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetCompanies()
     {
-        return Ok("companies");
+        var response = await _mediator.Send(new GetCompaniesRequest());
+        return Ok(response);
+    }
+
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetCompanyById([FromRoute] int id)
+    {
+        var response = await _mediator.Send(new GetCompanyByIdRequest(id));
+        if (response is null) return NotFound();
+        return Ok(response);
     }
 
     [HttpPost]
@@ -28,8 +36,6 @@ public class CompanyController : ControllerBase
     public async Task<IActionResult> AddNewCompany([FromBody] AddCompanyRequest request)
     {
         var response = await _mediator.Send(request);
-        var id = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
-
-        return Created("", response);
+        return Created($"/api/companies/{response.Id}", response);
     }
 }

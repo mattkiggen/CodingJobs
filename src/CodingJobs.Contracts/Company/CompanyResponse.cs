@@ -1,6 +1,6 @@
 ﻿namespace CodingJobs.Contracts.Company;
 
-public class AddCompanyResponse
+public class CompanyResponse
 {
     public int Id { get; set; }
     public string Name { get; set; } = null!;

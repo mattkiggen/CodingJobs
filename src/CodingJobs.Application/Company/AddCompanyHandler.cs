@@ -5,7 +5,7 @@ using Mediator;
 
 namespace CodingJobs.Application.Company;
 
-public class AddCompanyHandler : IRequestHandler<AddCompanyRequest, AddCompanyResponse>
+public class AddCompanyHandler : IRequestHandler<AddCompanyRequest, CompanyResponse>
 {
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
@@ -16,11 +16,11 @@ public class AddCompanyHandler : IRequestHandler<AddCompanyRequest, AddCompanyRe
         _unitOfWork = unitOfWork;
     }
     
-    public async ValueTask<AddCompanyResponse> Handle(AddCompanyRequest request, CancellationToken cancellationToken)
+    public async ValueTask<CompanyResponse> Handle(AddCompanyRequest request, CancellationToken cancellationToken)
     {
         var company = _mapper.Map<Domain.Models.Company>(request);
         var result = await _unitOfWork.CompanyRepository.AddAsync(company);
         await _unitOfWork.SaveChangesAsync();
-        return _mapper.Map<AddCompanyResponse>(result);
+        return _mapper.Map<CompanyResponse>(result);
     }
 }

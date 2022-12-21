@@ -8,7 +8,7 @@ public class CompanyProfile : Profile
     public CompanyProfile()
     {
         CreateMap<AddCompanyRequest, Domain.Models.Company>();
-        CreateMap<Domain.Models.Company, AddCompanyResponse>()
+        CreateMap<Domain.Models.Company, CompanyResponse>()
             .ForMember(
                 dest => dest.Id, 
                 src => src.MapFrom(c => c.CompanyId)
