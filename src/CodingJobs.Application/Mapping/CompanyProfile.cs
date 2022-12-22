@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using CodingJobs.Contracts.Company;
 using CodingJobs.Contracts.Company.Requests;
 using CodingJobs.Contracts.Company.Responses;
 
@@ -10,10 +9,13 @@ public class CompanyProfile : Profile
     public CompanyProfile()
     {
         CreateMap<AddCompanyRequest, Domain.Models.Company>();
+        
         CreateMap<Domain.Models.Company, CompanyResponse>()
             .ForMember(
-                dest => dest.Id, 
+                dest => dest.Id,
                 src => src.MapFrom(c => c.CompanyId)
             );
+
+        CreateMap<UpdateCompanyRequest, Domain.Models.Company>();
     }
 }

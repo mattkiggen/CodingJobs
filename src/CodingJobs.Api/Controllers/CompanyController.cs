@@ -1,4 +1,5 @@
-﻿using CodingJobs.Contracts.Company;
+﻿using CodingJobs.Application.Commands.Company;
+using CodingJobs.Application.Queries.Company;
 using CodingJobs.Contracts.Company.Requests;
 using Mediator;
 using Microsoft.AspNetCore.Authorization;
@@ -18,25 +19,35 @@ public class CompanyController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetCompanies()
+    public async Task<IActionResult> GetAllCompanies()
     {
-        var response = await _mediator.Send(new GetCompaniesRequest());
+        var query = new GetAllCompaniesQuery();
+        var response = await _mediator.Send(query);
         return Ok(response);
     }
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetCompanyById([FromRoute] int id)
     {
-        var response = await _mediator.Send(new GetCompanyByIdRequest(id));
-        if (response is null) return NotFound();
-        return Ok(response);
+        var query = new GetCompanyByIdQuery(id);
+        var response = await _mediator.Send(query);
+        return response is not null ? Ok(response) : NotFound();
     }
 
     [HttpPost]
     [Authorize("create:companies")]
     public async Task<IActionResult> AddNewCompany([FromBody] AddCompanyRequest request)
     {
-        var response = await _mediator.Send(request);
-        return Created($"/api/companies/{response.Id}", response);
+        var command = new AddCompanyCommand(request);
+        var response = await _mediator.Send(command);
+        return Created("", response);
+    }
+
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> UpdateCompanyById([FromRoute] int id, [FromBody] UpdateCompanyRequest request)
+    {
+        var command = new UpdateCompanyCommand(id, request);
+        var response = await _mediator.Send(command);
+        return response is not null ? Ok(response) : NotFound();
     }
 }

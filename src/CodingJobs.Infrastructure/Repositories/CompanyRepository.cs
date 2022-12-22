@@ -30,9 +30,12 @@ public class CompanyRepository : ICompanyRepository
         return result.Entity;
     }
 
-    public async Task UpdateAsync(Company company)
+    public async Task<Company?> UpdateAsync(Company company)
     {
-        throw new NotImplementedException();
+        var result = await FindAsync(x => x.CompanyId == company.CompanyId);
+        if (result is null) return null;
+        _context.Entry(result).CurrentValues.SetValues(company);
+        return result;
     }
 
     public Task RemoveAsync(Company t)
