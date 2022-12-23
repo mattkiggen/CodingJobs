@@ -43,7 +43,7 @@ public class CompanyRepository : ICompanyRepository
         throw new NotImplementedException();
     }
 
-    public async Task<Company?> GetCompanyWithJobs(int id)
+    public async Task<Company?> GetCompanyWithJobsAsync(int id)
     {
         var result = await _context.Companies.Include(c => c.Jobs)
             .AsNoTracking()
