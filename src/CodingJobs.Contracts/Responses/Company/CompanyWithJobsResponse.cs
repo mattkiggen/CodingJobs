@@ -1,6 +1,8 @@
-﻿namespace CodingJobs.Contracts.Responses.Company;
+﻿using CodingJobs.Contracts.Responses.Job;
 
-public class CompanyResponse
+namespace CodingJobs.Contracts.Responses.Company;
+
+public class CompanyWithJobsResponse
 {
     public int CompanyId { get; set; }
     public string Name { get; set; } = null!;
@@ -15,4 +17,6 @@ public class CompanyResponse
     public string? FacebookUrl { get; set; }
     public string? TwitterUrl { get; set; }
     public string? LinkedinUrl { get; set; }
+
+    public List<JobResponse>? Jobs { get; set; }
 }

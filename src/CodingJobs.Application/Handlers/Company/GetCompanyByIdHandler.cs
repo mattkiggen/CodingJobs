@@ -6,7 +6,7 @@ using Mediator;
 
 namespace CodingJobs.Application.Handlers.Company;
 
-public class GetCompanyByIdHandler : IRequestHandler<GetCompanyByIdQuery, CompanyResponse?>
+public class GetCompanyByIdHandler : IRequestHandler<GetCompanyByIdQuery, CompanyWithJobsResponse?>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -17,9 +17,9 @@ public class GetCompanyByIdHandler : IRequestHandler<GetCompanyByIdQuery, Compan
         _mapper = mapper;
     }
     
-    public async ValueTask<CompanyResponse?> Handle(GetCompanyByIdQuery query, CancellationToken cancellationToken)
+    public async ValueTask<CompanyWithJobsResponse?> Handle(GetCompanyByIdQuery query, CancellationToken cancellationToken)
     {
-        var result = await _unitOfWork.CompanyRepository.FindAsync(c => c.CompanyId == query.Id);
-        return result != null ? _mapper.Map<CompanyResponse>(result) : null;
+        var result = await _unitOfWork.CompanyRepository.GetCompanyWithJobs(query.Id);
+        return result != null ? _mapper.Map<CompanyWithJobsResponse>(result) : null;
     }
 }

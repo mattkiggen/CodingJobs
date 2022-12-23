@@ -4,5 +4,5 @@ namespace CodingJobs.Infrastructure.Repositories;
 
 public interface ICompanyRepository : IRepository<Company>
 {
-    Task<Company> GetCompanyWithJobs();
+    Task<Company?> GetCompanyWithJobs(int id);
 }

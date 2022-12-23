@@ -11,6 +11,7 @@ namespace CodingJobs.Api.Controllers;
 [ApiController]
 [Route("api/companies")]
 [Produces("application/json")]
+[Consumes("application/json")]
 public class CompanyController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -58,7 +59,7 @@ public class CompanyController : ControllerBase
     {
         var command = new AddCompanyCommand(request);
         var response = await _mediator.Send(command);
-        return Created($"/api/companies/{response.Id}", response);
+        return Created($"/api/companies/{response.CompanyId}", response);
     }
 
     /// <summary>

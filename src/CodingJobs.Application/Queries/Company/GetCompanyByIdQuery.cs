@@ -3,7 +3,7 @@ using Mediator;
 
 namespace CodingJobs.Application.Queries.Company;
 
-public class GetCompanyByIdQuery : IRequest<CompanyResponse?>
+public class GetCompanyByIdQuery : IRequest<CompanyWithJobsResponse?>
 {
     public int Id { get; }
 
