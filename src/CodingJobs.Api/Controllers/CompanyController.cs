@@ -31,7 +31,7 @@ public class CompanyController : ControllerBase
     {
         var query = new GetCompanyByIdQuery(id);
         var response = await _mediator.Send(query);
-        return response is not null ? Ok(response) : NotFound();
+        return response != null ? Ok(response) : NotFound();
     }
 
     [HttpPost]
@@ -40,7 +40,7 @@ public class CompanyController : ControllerBase
     {
         var command = new AddCompanyCommand(request);
         var response = await _mediator.Send(command);
-        return Created("", response);
+        return Created($"/api/companies/{response.Id}", response);
     }
 
     [HttpPut("{id:int}")]
@@ -48,6 +48,6 @@ public class CompanyController : ControllerBase
     {
         var command = new UpdateCompanyCommand(id, request);
         var response = await _mediator.Send(command);
-        return response is not null ? Ok(response) : NotFound();
+        return response != null ? Ok(response) : NotFound();
     }
 }
