@@ -18,6 +18,9 @@ public class CompanyController : ControllerBase
         _mediator = mediator;
     }
 
+    /// <summary>
+    /// Get a list of companies, does not include their jobs posted
+    /// </summary>
     [HttpGet]
     public async Task<IActionResult> GetAllCompanies()
     {
@@ -26,6 +29,10 @@ public class CompanyController : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// Get details of a company by ID, includes their jobs posted
+    /// </summary>
+    /// <param name="id"></param>
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetCompanyById([FromRoute] int id)
     {
@@ -34,6 +41,9 @@ public class CompanyController : ControllerBase
         return response != null ? Ok(response) : NotFound();
     }
 
+    /// <summary>
+    /// Create new company
+    /// </summary>
     [HttpPost]
     [Authorize("create:companies")]
     public async Task<IActionResult> AddNewCompany([FromBody] AddCompanyRequest request)
@@ -43,7 +53,11 @@ public class CompanyController : ControllerBase
         return Created($"/api/companies/{response.Id}", response);
     }
 
+    /// <summary>
+    /// Update a company by ID
+    /// </summary>
     [HttpPut("{id:int}")]
+    [Authorize("update:companies")]
     public async Task<IActionResult> UpdateCompanyById([FromRoute] int id, [FromBody] UpdateCompanyRequest request)
     {
         var command = new UpdateCompanyCommand(id, request);
