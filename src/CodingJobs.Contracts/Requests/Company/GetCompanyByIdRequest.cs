@@ -1,9 +1,6 @@
-﻿using CodingJobs.Contracts.Responses.Company;
-using Mediator;
+﻿namespace CodingJobs.Contracts.Requests.Company;
 
-namespace CodingJobs.Contracts.Requests.Company;
-
-public class GetCompanyByIdRequest : IRequest<CompanyResponse?>
+public class GetCompanyByIdRequest
 {
     public int Id { get; }
 

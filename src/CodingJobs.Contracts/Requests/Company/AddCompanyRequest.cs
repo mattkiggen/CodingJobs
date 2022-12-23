@@ -1,10 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using CodingJobs.Contracts.Responses.Company;
-using Mediator;
 
 namespace CodingJobs.Contracts.Requests.Company;
 
-public class AddCompanyRequest : IRequest<CompanyResponse>
+public class AddCompanyRequest
 {
     [Required] public string Name { get; set; } = null!;
     [Required] public string About { get; set; } = null!;
