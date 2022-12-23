@@ -1,7 +1,7 @@
-﻿using CodingJobs.Contracts.Company.Responses;
+﻿using CodingJobs.Contracts.Responses.Company;
 using Mediator;
 
-namespace CodingJobs.Contracts.Company.Requests;
+namespace CodingJobs.Contracts.Requests.Company;
 
 public class GetCompanyByIdRequest : IRequest<CompanyResponse?>
 {

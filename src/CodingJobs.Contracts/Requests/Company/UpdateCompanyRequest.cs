@@ -1,16 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using CodingJobs.Contracts.Company.Responses;
-using Mediator;
 
-namespace CodingJobs.Contracts.Company.Requests;
+namespace CodingJobs.Contracts.Requests.Company;
 
-public class AddCompanyRequest : IRequest<CompanyResponse>
+public class UpdateCompanyRequest
 {
     [Required] public string Name { get; set; } = null!;
     [Required] public string About { get; set; } = null!;
     [Required] public string Location { get; set; } = null!;
     [Required] public string Slug { get; set; } = null!;
-    
     public uint? NumberOfEmployees { get; set; }
     public string? YearFounded { get; set; }
     public string? CompanyLogoUrl { get; set; }

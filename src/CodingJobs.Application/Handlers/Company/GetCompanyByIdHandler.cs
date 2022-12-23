@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CodingJobs.Application.Queries.Company;
-using CodingJobs.Contracts.Company.Responses;
+using CodingJobs.Contracts.Responses.Company;
 using CodingJobs.Infrastructure.Database;
 using Mediator;
 
@@ -20,6 +20,6 @@ public class GetCompanyByIdHandler : IRequestHandler<GetCompanyByIdQuery, Compan
     public async ValueTask<CompanyResponse?> Handle(GetCompanyByIdQuery query, CancellationToken cancellationToken)
     {
         var result = await _unitOfWork.CompanyRepository.FindAsync(c => c.CompanyId == query.Id);
-        return result is null ? null : _mapper.Map<CompanyResponse>(result);
+        return result != null ? _mapper.Map<CompanyResponse>(result) : null;
     }
 }

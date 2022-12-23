@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using CodingJobs.Contracts.Company.Requests;
-using CodingJobs.Contracts.Company.Responses;
+using CodingJobs.Contracts.Requests.Company;
+using CodingJobs.Contracts.Responses.Company;
 
 namespace CodingJobs.Application.Mapping;
 

@@ -1,5 +1,5 @@
-﻿using CodingJobs.Contracts.Company.Requests;
-using CodingJobs.Contracts.Company.Responses;
+﻿using CodingJobs.Contracts.Requests.Company;
+using CodingJobs.Contracts.Responses.Company;
 using Mediator;
 
 namespace CodingJobs.Application.Commands.Company;

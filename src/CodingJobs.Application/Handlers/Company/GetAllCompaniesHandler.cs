@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CodingJobs.Application.Queries.Company;
-using CodingJobs.Contracts.Company.Responses;
+using CodingJobs.Contracts.Responses.Company;
 using CodingJobs.Infrastructure.Database;
 using Mediator;
 
