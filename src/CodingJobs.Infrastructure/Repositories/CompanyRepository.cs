@@ -16,7 +16,7 @@ public class CompanyRepository : ICompanyRepository
     
     public async Task<ICollection<Company>> GetAllAsync()
     {
-        return await _context.Companies.ToListAsync();
+        return await _context.Companies.AsNoTracking().ToListAsync();
     }
 
     public async Task<Company?> FindAsync(Expression<Func<Company, bool>> predicate)
