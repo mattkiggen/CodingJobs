@@ -18,6 +18,12 @@ public static class ConfigurePolicies
             )
         );
         
+        options.AddPolicy("delete:companies", 
+            p => p.Requirements.Add(
+                new HasScopeRequirement("update:companies", config["Auth0:Domain"])
+            )
+        );
+        
         options.AddPolicy("create:jobs", 
             p => p.Requirements.Add(
                 new HasScopeRequirement("create:jobs", config["Auth0:Domain"])
