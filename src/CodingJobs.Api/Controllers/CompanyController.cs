@@ -77,4 +77,15 @@ public class CompanyController : ControllerBase
         var response = await _mediator.Send(command);
         return response != null ? Ok(response) : NotFound();
     }
+
+    /// <summary>
+    /// Remove a company by ID
+    /// </summary>
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> RemoveCompanyById([FromRoute] int id)
+    {
+        var command = new RemoveCompanyCommand(id);
+        var response = await _mediator.Send(command);
+        return response == true ? Ok("Company deleted") : NotFound();
+    }
 }

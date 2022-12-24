@@ -38,9 +38,12 @@ public class CompanyRepository : ICompanyRepository
         return result;
     }
 
-    public Task RemoveAsync(Company t)
+    public async Task<bool?> RemoveByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        var company = await FindAsync(c => c.CompanyId == id);
+        if (company == null) return null;
+        _context.Companies.Remove(company);
+        return true;
     }
 
     public async Task<Company?> GetCompanyWithJobsAsync(int id)
