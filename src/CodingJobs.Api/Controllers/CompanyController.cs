@@ -53,8 +53,8 @@ public class CompanyController : ControllerBase
     [HttpPost]
     [Authorize("create:companies")]
     [ProducesResponseType(typeof(CompanyResponse),StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> AddNewCompany([FromBody] AddCompanyRequest request)
     {
         var command = new AddCompanyCommand(request);
@@ -68,9 +68,9 @@ public class CompanyController : ControllerBase
     [HttpPut("{id:int}")]
     [Authorize("update:companies")]
     [ProducesResponseType(typeof(CompanyResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateCompanyById([FromRoute] int id, [FromBody] UpdateCompanyRequest request)
     {
         var command = new UpdateCompanyCommand(id, request);
@@ -82,6 +82,10 @@ public class CompanyController : ControllerBase
     /// Remove a company by ID
     /// </summary>
     [HttpDelete("{id:int}")]
+    [Authorize("delete:companies")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> RemoveCompanyById([FromRoute] int id)
     {
         var command = new RemoveCompanyCommand(id);
