@@ -19,7 +19,7 @@ namespace CodingJobs.Infrastructure.Database.Migrations
                     About = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Slug = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NumberOfEmployees = table.Column<long>(type: "bigint", nullable: true),
+                    NumberOfEmployees = table.Column<int>(type: "int", nullable: true),
                     YearFounded = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CompanyLogoUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     WebsiteUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),

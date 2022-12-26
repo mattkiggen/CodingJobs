@@ -9,7 +9,7 @@ public class AddCompanyRequest
     [Required] public string Location { get; set; } = null!;
     [Required] public string Slug { get; set; } = null!;
     
-    public uint? NumberOfEmployees { get; set; }
+    public int? NumberOfEmployees { get; set; }
     public string? YearFounded { get; set; }
     public string? CompanyLogoUrl { get; set; }
     public string? WebsiteUrl { get; set; }

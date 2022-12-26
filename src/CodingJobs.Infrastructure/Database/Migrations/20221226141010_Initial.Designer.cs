@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodingJobs.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221221150553_Initial")]
+    [Migration("20221226141010_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,8 +53,8 @@ namespace CodingJobs.Infrastructure.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("NumberOfEmployees")
-                        .HasColumnType("bigint");
+                    b.Property<int?>("NumberOfEmployees")
+                        .HasColumnType("int");
 
                     b.Property<string>("Slug")
                         .IsRequired()

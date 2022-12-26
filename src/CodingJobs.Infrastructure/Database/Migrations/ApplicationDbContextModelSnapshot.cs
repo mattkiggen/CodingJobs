@@ -51,8 +51,8 @@ namespace CodingJobs.Infrastructure.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("NumberOfEmployees")
-                        .HasColumnType("bigint");
+                    b.Property<int?>("NumberOfEmployees")
+                        .HasColumnType("int");
 
                     b.Property<string>("Slug")
                         .IsRequired()
