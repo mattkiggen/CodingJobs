@@ -2,6 +2,7 @@
 using CodingJobs.Application.Queries.Company;
 using CodingJobs.Contracts.Requests.Company;
 using CodingJobs.Contracts.Responses.Company;
+using FluentValidation;
 using Mediator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,7 @@ namespace CodingJobs.Api.Controllers;
 public class CompanyController : ControllerBase
 {
     private readonly IMediator _mediator;
-    
+
     public CompanyController(IMediator mediator)
     {
         _mediator = mediator;
@@ -25,7 +26,7 @@ public class CompanyController : ControllerBase
     /// Get a list of companies, does not include their jobs posted
     /// </summary>
     [HttpGet]
-    [ProducesResponseType(typeof(List<CompanyResponse>),StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(List<CompanyResponse>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAllCompanies()
     {
         var query = new GetAllCompaniesQuery();
@@ -38,7 +39,7 @@ public class CompanyController : ControllerBase
     /// </summary>
     /// <param name="id"></param>
     [HttpGet("{id:int}")]
-    [ProducesResponseType(typeof(CompanyResponse),StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(CompanyResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetCompanyById([FromRoute] int id)
     {
@@ -52,14 +53,29 @@ public class CompanyController : ControllerBase
     /// </summary>
     [HttpPost]
     [Authorize("create:companies")]
-    [ProducesResponseType(typeof(CompanyResponse),StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(CompanyResponse), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> AddNewCompany([FromBody] AddCompanyRequest request)
     {
         var command = new AddCompanyCommand(request);
         var response = await _mediator.Send(command);
-        return Created($"/api/companies/{response.CompanyId}", response);
+
+        // Todo: Refactor to problem details and include error list, also cleanup?
+        return response.Match<IActionResult>(
+            c =>
+            {
+                return Created($"/api/companies/{c.CompanyId}", c);
+            },
+            e =>
+            {
+                if (e is ValidationException)
+                {
+                    return BadRequest("validation failed and we should include those details here");
+                }
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            });
     }
 
     /// <summary>
