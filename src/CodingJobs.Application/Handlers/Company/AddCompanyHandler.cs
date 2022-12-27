@@ -34,6 +34,7 @@ public class AddCompanyHandler : IRequestHandler<AddCompanyCommand, Result<Compa
         var company = _mapper.Map<Domain.Models.Company>(command.Request);
         var result = await _unitOfWork.CompanyRepository.AddAsync(company);
         await _unitOfWork.SaveChangesAsync();
+        
         return _mapper.Map<CompanyResponse>(result);
     }
 }
