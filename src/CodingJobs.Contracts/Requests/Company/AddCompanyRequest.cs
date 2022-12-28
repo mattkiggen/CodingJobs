@@ -4,6 +4,7 @@ namespace CodingJobs.Contracts.Requests.Company;
 
 public class AddCompanyRequest
 {
+    // Todo: Move to fluent validation
     [Required] public string Name { get; set; } = null!;
     [Required] public string About { get; set; } = null!;
     [Required] public string Location { get; set; } = null!;

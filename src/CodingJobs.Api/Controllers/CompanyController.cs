@@ -59,7 +59,7 @@ public class CompanyController : ControllerBase
     {
         var command = new AddCompanyCommand(request);
         var result = await _mediator.Send(command);
-        return Ok(result);
+        return Created($"/api/companies/{result.CompanyId}", result);
     }
 
     /// <summary>

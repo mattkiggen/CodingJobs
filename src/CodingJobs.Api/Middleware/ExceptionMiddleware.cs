@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CodingJobs.Api.Middleware;
 
@@ -17,10 +18,29 @@ public class ExceptionMiddleware
         {
             await _next(context);
         }
+        catch (ValidationException ve)
+        {
+            await HandleValidationExceptionAsync(context, ve);
+        }
         catch (Exception e)
         {
             await HandleExceptionAsync(context, e);
         }
+    }
+    
+    private async Task HandleValidationExceptionAsync(HttpContext context, ValidationException exception)
+    {
+        context.Response.StatusCode = StatusCodes.Status400BadRequest;
+        
+        // Todo: Create custom problem details that has less error info
+        await context.Response.WriteAsJsonAsync(new
+        {
+            Detail = "One or more errors occured",
+            Status = context.Response.StatusCode,
+            Title = "Bad Request",
+            Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+            Errors = exception.Errors
+        });
     }
 
     private async Task HandleExceptionAsync(HttpContext context, Exception exception)
