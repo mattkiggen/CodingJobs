@@ -1,9 +1,8 @@
 ﻿using System.Linq.Expressions;
-using CodingJobs.Domain.Models;
 using CodingJobs.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 
-namespace CodingJobs.Infrastructure.Repositories;
+namespace CodingJobs.Infrastructure.Repositories.Company;
 
 public class CompanyRepository : ICompanyRepository
 {
@@ -14,23 +13,23 @@ public class CompanyRepository : ICompanyRepository
         _context = context;
     }
     
-    public async Task<ICollection<Company>> GetAllAsync()
+    public async Task<ICollection<Domain.Models.Company>> GetAllAsync()
     {
         return await _context.Companies.AsNoTracking().ToListAsync();
     }
 
-    public async Task<Company?> FindAsync(Expression<Func<Company, bool>> predicate)
+    public async Task<Domain.Models.Company?> FindAsync(Expression<Func<Domain.Models.Company, bool>> predicate)
     {
         return await _context.Companies.FirstOrDefaultAsync(predicate);
     }
 
-    public async Task<Company> AddAsync(Company newCompany)
+    public async Task<Domain.Models.Company> AddAsync(Domain.Models.Company newCompany)
     {
         var result = await _context.Companies.AddAsync(newCompany);
         return result.Entity;
     }
 
-    public async Task<Company?> UpdateAsync(Company company)
+    public async Task<Domain.Models.Company?> UpdateAsync(Domain.Models.Company company)
     {
         var result = await FindAsync(x => x.CompanyId == company.CompanyId);
         
@@ -47,7 +46,7 @@ public class CompanyRepository : ICompanyRepository
         return true;
     }
 
-    public async Task<Company?> GetCompanyWithJobsAsync(int id)
+    public async Task<Domain.Models.Company?> GetCompanyWithJobsAsync(int id)
     {
         var result = await _context.Companies
             .Include(c => c.Jobs)
