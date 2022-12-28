@@ -7,6 +7,11 @@ public class AddCompanyRequestValidator : AbstractValidator<AddCompanyRequest>
 {
     public AddCompanyRequestValidator()
     {
+        RuleFor(x => x.Name).NotEmpty();
+        RuleFor(x => x.About).NotEmpty();
+        RuleFor(x => x.Location).NotEmpty();
+        RuleFor(x => x.Slug).NotEmpty();
+        
         RuleFor(x => x.NumberOfEmployees)
             .GreaterThan(0)
             .When(x => x.NumberOfEmployees.HasValue)
