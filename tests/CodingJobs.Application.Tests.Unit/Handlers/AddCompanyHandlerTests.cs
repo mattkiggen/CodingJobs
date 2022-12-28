@@ -3,6 +3,8 @@ using CodingJobs.Application.Commands.Company;
 using CodingJobs.Application.Handlers.Company;
 using CodingJobs.Application.Validators;
 using CodingJobs.Contracts.Requests.Company;
+using CodingJobs.Contracts.Responses.Company;
+using CodingJobs.Domain.Models;
 using CodingJobs.Infrastructure.Database;
 using FluentAssertions;
 using FluentValidation;
@@ -38,5 +40,35 @@ public class AddCompanyHandlerTests
         
         // Assert
         await action.Should().ThrowAsync<ValidationException>();
+    }
+
+    [Fact]
+    public async Task Handler_ShouldReturnCompanyResponse_WhenValidRequestIsGiven()
+    {
+        // Arrange
+        var request = new AddCompanyRequest
+        {
+            Name = "Company",
+            About = "About",
+            Slug = "company",
+            Location = "Location"
+        };
+        
+        var command = new AddCompanyCommand(request);
+
+        _unitOfWork.CompanyRepository.AddAsync(Arg.Any<Company>()).Returns(new Company
+        {
+            Name = "Company",
+            About = "About",
+            Slug = "company",
+            Location = "Location"
+        });
+
+        // Act
+        var response = await _sut.Handle(command, CancellationToken.None);
+        
+        //Assert
+        response.Should().BeOfType<CompanyResponse>();
+        response.Should().Match<CompanyResponse>(x => x.Name == "Company");
     }
 }
