@@ -1,4 +1,5 @@
 ﻿using CodingJobs.Domain.Models;
+using LanguageExt;
 
 namespace CodingJobs.Infrastructure.Repositories;
 

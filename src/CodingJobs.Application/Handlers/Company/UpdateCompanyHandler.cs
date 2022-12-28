@@ -21,8 +21,11 @@ public class UpdateCompanyHandler : IRequestHandler<UpdateCompanyCommand, Compan
     {
         var company = _mapper.Map<Domain.Models.Company>(command.Request);
         company.CompanyId = command.Id;
+        
         var result = await _unitOfWork.CompanyRepository.UpdateAsync(company);
+        if (result is null) return null;
         await _unitOfWork.SaveChangesAsync();
+
         return _mapper.Map<CompanyResponse>(result);
     }
 }

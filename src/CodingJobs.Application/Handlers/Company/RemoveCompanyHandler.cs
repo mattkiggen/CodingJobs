@@ -4,7 +4,7 @@ using Mediator;
 
 namespace CodingJobs.Application.Handlers.Company;
 
-public class RemoveCompanyHandler : IRequestHandler<RemoveCompanyCommand, bool?>
+public class RemoveCompanyHandler : IRequestHandler<RemoveCompanyCommand, bool>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -13,10 +13,10 @@ public class RemoveCompanyHandler : IRequestHandler<RemoveCompanyCommand, bool?>
         _unitOfWork = unitOfWork;
     }
     
-    public async ValueTask<bool?> Handle(RemoveCompanyCommand command, CancellationToken cancellationToken)
+    public async ValueTask<bool> Handle(RemoveCompanyCommand command, CancellationToken cancellationToken)
     {
         var result = await _unitOfWork.CompanyRepository.RemoveByIdAsync(command.Id);
-        await _unitOfWork.SaveChangesAsync();
+        if (result) await _unitOfWork.SaveChangesAsync();
         return result;
     }
 }

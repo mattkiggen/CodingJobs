@@ -6,7 +6,7 @@ using Mediator;
 
 namespace CodingJobs.Application.Handlers.Company;
 
-public class GetAllCompaniesHandler : IRequestHandler<GetAllCompaniesQuery, List<CompanyResponse>>
+public class GetAllCompaniesHandler : IRequestHandler<GetAllCompaniesQuery, ICollection<CompanyResponse>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -17,9 +17,9 @@ public class GetAllCompaniesHandler : IRequestHandler<GetAllCompaniesQuery, List
         _mapper = mapper;
     }
     
-    public async ValueTask<List<CompanyResponse>> Handle(GetAllCompaniesQuery request, CancellationToken cancellationToken)
+    public async ValueTask<ICollection<CompanyResponse>> Handle(GetAllCompaniesQuery request, CancellationToken cancellationToken)
     {
         var result = await _unitOfWork.CompanyRepository.GetAllAsync();
-        return result.Select(c => _mapper.Map<CompanyResponse>(c)).ToList();
+        return result.AsParallel().Select(c => _mapper.Map<CompanyResponse>(c)).ToList();
     }
 }

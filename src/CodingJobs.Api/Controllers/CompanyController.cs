@@ -2,7 +2,6 @@
 using CodingJobs.Application.Queries.Company;
 using CodingJobs.Contracts.Requests.Company;
 using CodingJobs.Contracts.Responses.Company;
-using FluentValidation;
 using Mediator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -44,8 +43,8 @@ public class CompanyController : ControllerBase
     public async Task<IActionResult> GetCompanyById([FromRoute] int id)
     {
         var query = new GetCompanyByIdQuery(id);
-        var response = await _mediator.Send(query);
-        return response != null ? Ok(response) : NotFound();
+        var result = await _mediator.Send(query);
+        return result is null ? NotFound() : Ok(result);
     }
 
     /// <summary>
@@ -59,23 +58,8 @@ public class CompanyController : ControllerBase
     public async Task<IActionResult> AddNewCompany([FromBody] AddCompanyRequest request)
     {
         var command = new AddCompanyCommand(request);
-        var response = await _mediator.Send(command);
-
-        // Todo: Refactor to problem details and include error list, also cleanup?
-        return response.Match<IActionResult>(
-            c =>
-            {
-                return Created($"/api/companies/{c.CompanyId}", c);
-            },
-            e =>
-            {
-                if (e is ValidationException)
-                {
-                    return BadRequest("validation failed and we should include those details here");
-                }
-
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            });
+        var result = await _mediator.Send(command);
+        return Ok(result);
     }
 
     /// <summary>
@@ -91,7 +75,7 @@ public class CompanyController : ControllerBase
     {
         var command = new UpdateCompanyCommand(id, request);
         var response = await _mediator.Send(command);
-        return response != null ? Ok(response) : NotFound();
+        return response is null ? NotFound() : Ok(response);
     }
 
     /// <summary>
@@ -106,6 +90,6 @@ public class CompanyController : ControllerBase
     {
         var command = new RemoveCompanyCommand(id);
         var response = await _mediator.Send(command);
-        return response == true ? Ok("Company deleted") : NotFound();
+        return response ? Ok("Company deleted") : NotFound();
     }
 }

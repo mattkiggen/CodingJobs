@@ -20,6 +20,6 @@ public class GetCompanyByIdHandler : IRequestHandler<GetCompanyByIdQuery, Compan
     public async ValueTask<CompanyWithJobsResponse?> Handle(GetCompanyByIdQuery query, CancellationToken cancellationToken)
     {
         var result = await _unitOfWork.CompanyRepository.GetCompanyWithJobsAsync(query.Id);
-        return result != null ? _mapper.Map<CompanyWithJobsResponse>(result) : null;
+        return result is null ? null : _mapper.Map<CompanyWithJobsResponse>(result);
     }
 }

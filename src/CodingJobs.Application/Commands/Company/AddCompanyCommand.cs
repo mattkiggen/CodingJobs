@@ -1,11 +1,10 @@
 ﻿using CodingJobs.Contracts.Requests.Company;
 using CodingJobs.Contracts.Responses.Company;
-using LanguageExt.Common;
 using Mediator;
 
 namespace CodingJobs.Application.Commands.Company;
 
-public class AddCompanyCommand : IRequest<Result<CompanyResponse>>
+public class AddCompanyCommand : IRequest<CompanyResponse>
 {
     public AddCompanyRequest Request { get; }
 

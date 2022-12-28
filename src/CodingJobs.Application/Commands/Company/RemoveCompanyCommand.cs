@@ -2,7 +2,7 @@
 
 namespace CodingJobs.Application.Commands.Company;
 
-public class RemoveCompanyCommand : IRequest<bool?>
+public class RemoveCompanyCommand : IRequest<bool>
 {
     public int Id { get; }
 

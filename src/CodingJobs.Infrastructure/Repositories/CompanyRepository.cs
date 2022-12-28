@@ -33,24 +33,27 @@ public class CompanyRepository : ICompanyRepository
     public async Task<Company?> UpdateAsync(Company company)
     {
         var result = await FindAsync(x => x.CompanyId == company.CompanyId);
-        if (result is null) return null;
-        _context.Entry(result).CurrentValues.SetValues(company);
+        
+        if (result is not null) _context.Entry(result).CurrentValues.SetValues(company);
+
         return result;
     }
 
-    public async Task<bool?> RemoveByIdAsync(int id)
+    public async Task<bool> RemoveByIdAsync(int id)
     {
         var company = await FindAsync(c => c.CompanyId == id);
-        if (company == null) return null;
+        if (company == null) return false;
         _context.Companies.Remove(company);
         return true;
     }
 
     public async Task<Company?> GetCompanyWithJobsAsync(int id)
     {
-        var result = await _context.Companies.Include(c => c.Jobs)
+        var result = await _context.Companies
+            .Include(c => c.Jobs)
             .AsNoTracking()
             .FirstOrDefaultAsync(c => c.CompanyId == id);
+        
         return result;
     }
 }
