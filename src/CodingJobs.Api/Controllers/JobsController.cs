@@ -25,7 +25,6 @@ public class JobsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateJob([FromBody] AddJobRequest request)
     {
-        Console.WriteLine(request.EmploymentType);
         var command = new AddJobCommand(request);
         var response = await _mediator.Send(command);
         return Ok(response);
