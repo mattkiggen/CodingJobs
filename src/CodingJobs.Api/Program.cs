@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Text.Json.Serialization;
 using CodingJobs.Api.Authorization;
+using CodingJobs.Api.Filters;
 using CodingJobs.Api.Middleware;
 using CodingJobs.Application;
 using CodingJobs.Infrastructure;
@@ -46,6 +47,7 @@ builder.Services.AddSwaggerGen(options =>
 {
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+    options.SchemaFilter<SmartEnumSchemaFilter>();
 });
 
 var app = builder.Build();

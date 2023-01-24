@@ -8,5 +8,7 @@ public class JobConfig : IEntityTypeConfiguration<Job>
 {
     public void Configure(EntityTypeBuilder<Job> builder)
     {
+        builder.Property(j => j.PublishedOn)
+            .HasDefaultValueSql("now()");
     }
 }
