@@ -14,7 +14,7 @@
       <PackageReference Include="Ardalis.SmartEnum" Version="2.1.0" />
       <PackageReference Include="Ardalis.SmartEnum.EFCore" Version="2.1.0" />
       <PackageReference Include="LanguageExt.Core" Version="4.4.0" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.12" />
+      <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
     </ItemGroup>
 
 </Project>

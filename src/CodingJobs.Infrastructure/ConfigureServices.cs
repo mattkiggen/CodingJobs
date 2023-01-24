@@ -9,9 +9,11 @@ public static class ConfigureServices
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration config)
     {
-        services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(config["Db:ConnectionString"])
-        );
+        services.AddDbContext<ApplicationDbContext>(opt =>
+        {
+            var connectionString = config["Db:ConnectionString"];
+            opt.UseMySql(connectionString, new MySqlServerVersion(ServerVersion.AutoDetect(connectionString)));
+        });
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
