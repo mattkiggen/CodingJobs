@@ -11,7 +11,7 @@ public class Job
     [Required] public string ApplicationUrl { get; set; } = null!;
     [Required] public EmploymentTypes EmploymentType { get; set; } = null!;
     [Required] public int CompanyId { get; set; }
-    public DateTime PublishedOn { get; set; }
+    public DateTime PublishedOn { get; set; } = DateTime.Now;
     [Required] public DateTime ExpiresOn { get; set; }
     [Required] public ICollection<Skill> Skills { get; set; } = null!;
 }

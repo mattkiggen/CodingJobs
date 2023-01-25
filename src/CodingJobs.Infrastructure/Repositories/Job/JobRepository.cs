@@ -25,6 +25,7 @@ public class JobRepository : IJobRepository
 
     public async Task<Domain.Models.Job> AddAsync(Domain.Models.Job newJob)
     {
+        newJob.Skills.ToList().ForEach(s => _context.Attach(s));
         var result = await _context.Jobs.AddAsync(newJob);
         return result.Entity;
     }

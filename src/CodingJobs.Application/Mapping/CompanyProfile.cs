@@ -8,9 +8,12 @@ public class CompanyProfile : Profile
 {
     public CompanyProfile()
     {
+        // Contract to domain
         CreateMap<AddCompanyRequest, Domain.Models.Company>();
+        CreateMap<UpdateCompanyRequest, Domain.Models.Company>();
+        
+        // Domain to contract
         CreateMap<Domain.Models.Company, CompanyResponse>();
         CreateMap<Domain.Models.Company, CompanyWithJobsResponse>();
-        CreateMap<UpdateCompanyRequest, Domain.Models.Company>();
     }
 }
